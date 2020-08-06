@@ -6,7 +6,7 @@ pub struct Clock {
 }
 
 impl Clock {
-    pub fn new(freq: u32) -> Self {
+    pub fn new(freq: u16) -> Self {
         Self {
             period: Duration::from_nanos(1_000_000_000 / freq as u64),
             offset: Instant::now()

@@ -1,42 +1,42 @@
 use std::fmt;
 
 pub enum Op {
-    SYS  { addr: u16 },
-    CLS,
-    RET,
-    JP   { addr: u16 },                 // jump
-    CALL { addr: u16 },
-    SE   { reg: u8, byte: u8 },         // skip equal immediate
-    SNE  { reg: u8, byte: u8 },         // skip not equal immediate
-    SER  { reg_a: u8, reg_b: u8 },      // skip equal register
-    LD   { reg: u8, byte: u8 },         // load
-    ADD  { reg: u8, byte: u8 },         // add immediate
-    LDR  { reg_a: u8, reg_b: u8 },      // load register
-    OR   { reg_a: u8, reg_b: u8 },
-    AND  { reg_a: u8, reg_b: u8 },
-    XOR  { reg_a: u8, reg_b: u8 },
-    ADDR { reg_a: u8, reg_b: u8 },      // add register
-    SUB  { reg_a: u8, reg_b: u8 },
-    SHR  { reg_a: u8, reg_b: u8 },
-    SUBN { reg_a: u8, reg_b: u8 },
-    SHL  { reg_a: u8, reg_b: u8 },
-    SNER { reg_a: u8, reg_b: u8 },      // skip not equal register
-    LDA  { addr: u16 },                 // load address
-    JPO  { addr: u16 },                 // jump to address with offset
-    RND  { reg: u8, byte: u8 },
-    DRW  { reg_a: u8, reg_b: u8, nibble: u8 },
-    SKP  { reg: u8 },
-    SKNP { reg: u8 },
-    LDDT { reg: u8 },                   // load delay timer
-    LDKP { reg: u8 },                   // load key press
-    STDT { reg: u8 },                   // store delay timer
-    STST { reg: u8 },                   // store sound timer
-    ADDA { reg: u8 },                   // add address
-    LDSA { reg: u8 },                   // load sprite address
-    STDR { reg: u8 },                   // store decimal representation
-    STRR { reg: u8 },                   // store registers
-    LDRR { reg: u8 },                   // load registers
-    INV  { opcode: u16 },
+    SYS  { addr: u16 },                         // 0nnn
+    CLS,                                        // 00E0
+    RET,                                        // 00EE
+    JP   { addr: u16 },                         // 1nnn
+    CALL { addr: u16 },                         // 2nnn
+    SE   { reg: u8, byte: u8 },                 // 3xkk
+    SNE  { reg: u8, byte: u8 },                 // 4xkk
+    SER  { reg_a: u8, reg_b: u8 },              // 5xy0
+    LD   { reg: u8, byte: u8 },                 // 6xkk
+    ADD  { reg: u8, byte: u8 },                 // 7xkk
+    LDR  { reg_a: u8, reg_b: u8 },              // 8xy0
+    OR   { reg_a: u8, reg_b: u8 },              // 8xy1
+    AND  { reg_a: u8, reg_b: u8 },              // 8xy2
+    XOR  { reg_a: u8, reg_b: u8 },              // 8xy3
+    ADDR { reg_a: u8, reg_b: u8 },              // 8xy4
+    SUB  { reg_a: u8, reg_b: u8 },              // 8xy5
+    SHR  { reg_a: u8, reg_b: u8 },              // 8xy6
+    SUBN { reg_a: u8, reg_b: u8 },              // 8xy7
+    SHL  { reg_a: u8, reg_b: u8 },              // 8xyE
+    SNER { reg_a: u8, reg_b: u8 },              // 9xy0
+    LDA  { addr: u16 },                         // Annn
+    JPO  { addr: u16 },                         // Bnnn
+    RND  { reg: u8, byte: u8 },                 // Cxkk
+    DRW  { reg_a: u8, reg_b: u8, nibble: u8 },  // Dxyn
+    SKP  { reg: u8 },                           // Ex9E
+    SKNP { reg: u8 },                           // ExA1
+    LDDT { reg: u8 },                           // Fx07
+    LDKP { reg: u8 },                           // Fx0A
+    STDT { reg: u8 },                           // Fx15
+    STST { reg: u8 },                           // Fx18
+    ADDA { reg: u8 },                           // Fx1E
+    LDSA { reg: u8 },                           // Fx29
+    STDR { reg: u8 },                           // Fx33
+    STRR { reg: u8 },                           // Fx55
+    LDRR { reg: u8 },                           // Fx66
+    INV  { opcode: u16 },                       // invalid
 }
 
 impl Op {
@@ -162,9 +162,9 @@ impl Op {
 
     pub fn name(&self) -> &'static str {
         match self{
+            Self::SYS  {..} => "SYS",
             Self::CLS       => "CLS",
             Self::RET       => "RET",
-            Self::SYS  {..} => "SYS",
             Self::JP   {..} => "JP",
             Self::CALL {..} => "CALL",
             Self::SE   {..} => "SE",

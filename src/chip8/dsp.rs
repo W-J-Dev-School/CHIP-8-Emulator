@@ -6,7 +6,6 @@ const DISPLAY_H: usize = 32;
 pub struct Display {
     pixels: [bool; DISPLAY_W * DISPLAY_H],
     redraw: bool,
-    v_wrap: bool,
 }
 
 impl Display {
@@ -14,7 +13,6 @@ impl Display {
         Self {
             pixels: [false; DISPLAY_W * DISPLAY_H],
             redraw: true,
-            v_wrap: true, // in standard CHIP-8 this is true
         }
     }
 
@@ -23,10 +21,6 @@ impl Display {
     }
 
     pub fn set_pixel(&mut self, x: usize, y: usize, pixel: bool) -> bool {
-        if !self.v_wrap && y >= DISPLAY_H {
-            // Some games (BLITZ) need this
-            return false;
-        }
         let x = x % DISPLAY_W;
         let y = y % DISPLAY_H;
         let addr = x + (y * DISPLAY_W);
@@ -36,6 +30,10 @@ impl Display {
         let erased = self.pixels[addr] && pixel; // pixel changed from 1 to 0
         self.pixels[addr] ^= pixel;
         erased
+    }
+
+    pub fn height(&self) -> usize {
+        DISPLAY_H
     }
 
     #[allow(unused)]
