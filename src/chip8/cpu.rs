@@ -3,7 +3,7 @@ use super::mem::Memory;
 use super::dsp::Display;
 use super::kbd::Keyboard;
 use super::op::Op;
-use super::stt::Settings;
+use super::set::Settings;
 
 const STACK_SIZE: usize = 16;
 

@@ -8,7 +8,7 @@ use dsp::Display;
 use kbd::Keyboard;
 use mem::Memory;
 use rng::RNG;
-use stt::Settings;
+use set::Settings;
 use super::platform::{Platform, PlatformEvent};
 
 mod clk;
@@ -18,7 +18,7 @@ mod kbd;
 mod mem;
 mod op;
 mod rng;
-mod stt;
+mod set;
 
 pub struct CHIP8 {
     settings: Settings,
