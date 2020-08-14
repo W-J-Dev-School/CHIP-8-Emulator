@@ -37,7 +37,7 @@ impl CHIP8 {
             memory: Memory::new(),
             display: Display::new(),
             keyboard: Keyboard::new(),
-            cpu: CPU::new()
+            cpu: CPU::new(),
         }
     }
 
@@ -60,8 +60,8 @@ impl CHIP8 {
                 let addr = (0x200 + i) as u16;
                 let byte = self.memory.read(addr);
                 print!("{:02x} ", byte);
-                if (i + 1) % 16 == 0 {
-                    println!("")
+                if (i + 1) % 16 == 0 || i == rom_size - 1 {
+                    println!();
                 } else if (i + 1) % 4 == 0 {
                     print!(" ");
                 }

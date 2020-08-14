@@ -21,29 +21,31 @@ const SPRITES: [[u8; 5]; 16] = [
 
 const SPRITES_ADDR: usize = 0x0000;
 
-pub struct Memory([u8; MEMORY_SIZE]);
+pub struct Memory {
+    bytes: [u8; MEMORY_SIZE]
+}
 
 impl Memory {
     pub fn new() -> Self {
-        let mut mem = Self([0; MEMORY_SIZE]);
+        let mut bytes = [0; MEMORY_SIZE];
 
         for (i, s) in SPRITES.iter().enumerate() {
-            let addr = mem.sprite_address(i as u8) as usize;
-            mem.0[addr..addr+5].copy_from_slice(s);
+            let addr = Self::sprite_address(i as u8) as usize;
+            bytes[addr..addr+5].copy_from_slice(s);
         }
 
-        mem
+        Self { bytes }
     }
 
-    pub fn sprite_address(&self, sprite: u8) -> u16 {
+    pub fn sprite_address(sprite: u8) -> u16 {
         (SPRITES_ADDR + (sprite as usize * 5)) as u16
     }
 
     pub fn read(&self, addr: u16) -> u8 {
-        self.0[addr as usize]
+        self.bytes[addr as usize]
     }
 
     pub fn write(&mut self, addr: u16, byte: u8) {
-        self.0[addr as usize] = byte;
+        self.bytes[addr as usize] = byte;
     }
 }

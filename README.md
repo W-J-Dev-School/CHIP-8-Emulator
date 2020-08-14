@@ -6,7 +6,7 @@ A CHIP-8 emulator written in Rust in ~1000 lines.
 
 If you're interested in writing video game console emulators have a look at the article below. I explain how emulators work and how to approach writing them:
 
-[How to write a game console emulator](https://wjdevschool.com/blog/video-game-console-emulator/)
+[How To Write A Game Console Emulator](https://wjdevschool.com/blog/video-game-console-emulator/)
 
 ## File Structure
 
@@ -70,7 +70,7 @@ Tested briefly:
 
 Things used to write this emulator:
 
-* [Cowgod's CHIP-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#Bnnn)
+* [Cowgod's CHIP-8 Technical Reference](http://devernay.free.fr/hacks/chip8/C8TECH10.HTM)
 * [Mastering CHIP-8](http://mattmik.com/files/chip8/mastering/chip8.html)
 * [Kiwi-8 Emulator](https://github.com/tomdaley92/kiwi-8)
 * [Public Domain ROMs](https://www.zophar.net/pdroms/chip8.html)

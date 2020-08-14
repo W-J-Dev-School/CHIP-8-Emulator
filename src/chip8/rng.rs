@@ -1,6 +1,7 @@
-// Based on:
-// - https://en.wikipedia.org/wiki/Linear_congruential_generator
-// - https://en.wikipedia.org/wiki/Lehmer_random_number_generator
+// https://en.wikipedia.org/wiki/Linear_congruential_generator
+// https://en.wikipedia.org/wiki/Lehmer_random_number_generator
+
+// RNG(n+1) = (A * RNG(n) + C) mod M
 
 const RNG_A: u32 = 48271;
 const RNG_C: u32 = 1;
@@ -16,7 +17,6 @@ impl RNG {
     }
 
     pub fn next(&mut self) -> u8 {
-        // RNG(n+1) = (A * RNG(n) + C) mod M
         self.seed = RNG_A.overflowing_mul(self.seed).0.overflowing_add(RNG_C).0 % RNG_M;
         (self.seed % 256) as u8
     }

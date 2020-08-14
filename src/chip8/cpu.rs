@@ -58,7 +58,7 @@ impl CPU {
         let op = Op::decode(opcode);
 
         if settings.print_opcodes {
-            println!("{:#05X}: {:#06X} {}", self.pc, opcode, op);
+            println!("{:#05X}: {:#06X} {}", opaddr, opcode, op);
         }
 
         match op {
@@ -93,7 +93,7 @@ impl CPU {
             Op::STDT { reg }                  => self.stdt(reg),
             Op::STST { reg }                  => self.stst(reg),
             Op::ADDA { reg }                  => self.adda(reg, settings),
-            Op::LDSA { reg }                  => self.ldsa(reg, memory),
+            Op::LDSA { reg }                  => self.ldsa(reg),
             Op::STDR { reg }                  => self.stdr(reg, memory),
             Op::STRR { reg }                  => self.strr(reg, memory, settings),
             Op::LDRR { reg }                  => self.ldrr(reg, memory, settings),
@@ -109,7 +109,7 @@ impl CPU {
 
     fn cls(&mut self, display: &mut Display) {
         display.clear();
-        //display.print();
+        //println!("{}", display);
     }
 
     fn ret(&mut self) {
@@ -246,7 +246,7 @@ impl CPU {
 
         self.v[0xF] = if pixel_erased { 1 } else { 0 };
 
-        //display.print();
+        //println!("{}", display);
     }
 
     fn skp(&mut self, reg: u8, keyboard: &mut Keyboard) {
@@ -269,7 +269,7 @@ impl CPU {
         if let Some(key) = keyboard.wait_keypress() {
             self.v[reg as usize] = key;
         } else {
-            self.pc -= 2; // redo this instruction
+            self.pc -= 2;
         }
     }
 
@@ -289,8 +289,8 @@ impl CPU {
         }
     }
 
-    fn ldsa(&mut self, reg: u8, memory: &mut Memory) {
-        self.i = memory.sprite_address(self.v[reg as usize]);
+    fn ldsa(&mut self, reg: u8) {
+        self.i = Memory::sprite_address(self.v[reg as usize]);
     }
 
     fn stdr(&mut self, reg: u8, memory: &mut Memory) {
