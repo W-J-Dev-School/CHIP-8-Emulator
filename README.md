@@ -6,7 +6,7 @@ A CHIP-8 emulator written in Rust in ~1000 lines.
 
 If you're interested in writing video game console emulators have a look at the article below. I explain how emulators work and how to approach writing them:
 
-[How To Write A Game Console Emulator](https://wjdevschool.com/blog/video-game-console-emulator/)
+[How To Write A Game Console Emulator](https://wbogocki.medium.com/how-to-code-a-game-console-emulator-7a75959d865) (NOTE: This is a copy on Medium. The original used to be hosted on the project's website, which has been inactive for a while so I let the domain expire).
 
 ## File Structure
 
